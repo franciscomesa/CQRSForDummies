@@ -6,7 +6,7 @@ namespace CQRSWebApplication.Controllers;
 
 public class CreateUserController
 {
-    private CommandBus commandBus;
+    private readonly CommandBus commandBus;
 
     public CreateUserController(CommandBus commandBus)
     {
