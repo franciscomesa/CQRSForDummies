@@ -1,9 +1,12 @@
-﻿namespace CQRSWebApplication.Controllers;
+﻿using CQRSWebApplication.DTOs;
+
+namespace CQRSWebApplication.Controllers;
 
 public class CreateUserController
 {
-    public void Execute()
+    public void Execute(User fooUSer)
     {
+        
         throw new NotImplementedException();
     }
 }

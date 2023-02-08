@@ -1,4 +1,6 @@
 ﻿using CQRSWebApplication.Controllers;
+using CQRSWebApplication.DTOs;
+using Microsoft.AspNetCore.Identity;
 
 namespace Test.CQRSWebApplication.Controllers;
 
@@ -8,12 +10,13 @@ public class CreateUserControllerTests
     public void CreateUserIsNotImplemented()
     {
         var createUSerController = new CreateUserController();
-        Action executeMethod = () => createUSerController.Execute();  // Lambda de toda la vida
-        void ExecuteMethod() => createUSerController.Execute();       // Local function
+        var fooUSer = new User(1);
+        Action executeMethod = () => createUSerController.Execute(fooUSer);
 
-        var exception = Assert.Throws<NotImplementedException>((Action)ExecuteMethod);
+        var exception = Assert.Throws<NotImplementedException>(executeMethod);
 
         Assert.Equal("The method or operation is not implemented.", exception.Message);
         Assert.False(false);
     }
 }
+
