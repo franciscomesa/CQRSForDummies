@@ -1,6 +1,5 @@
 ﻿using CQRSWebApplication.Controllers;
 using CQRSWebApplication.DTOs;
-using Microsoft.AspNetCore.Identity;
 
 namespace Test.CQRSWebApplication.Controllers;
 
