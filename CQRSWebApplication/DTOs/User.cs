@@ -2,7 +2,7 @@
 
 public class User
 {
-    private int Id { get; }
+    public int Id { get; }
 
     public User(int id)
     {

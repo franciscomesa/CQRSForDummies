@@ -1,5 +1,7 @@
-﻿using CQRSWebApplication.Controllers;
+﻿using CQRSWebApplication.Common.CommandBus;
+using CQRSWebApplication.Controllers;
 using CQRSWebApplication.DTOs;
+using NSubstitute;
 
 namespace Test.CQRSWebApplication.Controllers;
 
@@ -8,7 +10,9 @@ public class CreateUserControllerTests
     [Fact]
     public void CreateUserIsNotImplemented()
     {
-        var createUSerController = new CreateUserController();
+        var mockCommandBus = Substitute.For<CommandBus>();
+        
+        var createUSerController = new CreateUserController(mockCommandBus);
         var fooUSer = new User(1);
         Action executeMethod = () => createUSerController.Execute(fooUSer);
 
