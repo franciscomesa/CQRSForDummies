@@ -19,7 +19,7 @@ public class CreateUserControllerTests
     public void CreateUserIsNotImplemented()
     {
         var fooUSer = new User(1);
-        var mockCommandBus = Substitute.For<CommandBus>();
+        var mockCommandBus = Substitute.For<ICommandBus>();
         var createUSerController = new CreateUserController(mockCommandBus);
         Action executeMethod = () => createUSerController.Execute(fooUSer);
 
@@ -32,13 +32,13 @@ public class CreateUserControllerTests
     public void CreateUserSendCommandBus()
     {
         var fooUSer = new User(1);
-        var mockCommandBus = Substitute.For<CommandBus>();
+        var mockCommandBus = Substitute.For<ICommandBus>();
         var createUSerController = new CreateUserController(mockCommandBus);
         Action executeMethod = () => createUSerController.Execute(fooUSer);
 
         var exception = Assert.Throws<NotImplementedException>(executeMethod);
         
-        mockCommandBus.Received().Send(Arg.Any<CreateUserCommand>()); // << This will fail if 2 or 4 calls were received
+        mockCommandBus.Received().Send(Arg.Is<CreateUserCommand>(command => command.Id == fooUSer.Id)); // << This will fail if 2 or 4 calls were received
 
         Assert.Equal("The method or operation is not implemented.", exception.Message);
     }

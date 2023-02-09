@@ -2,7 +2,7 @@
 
 namespace CQRSWebApplication.Common.CommandBus;
 
-public interface CommandBus
+public interface ICommandBus
 {
     void Send(CreateUserCommand createUserCommand);
 }

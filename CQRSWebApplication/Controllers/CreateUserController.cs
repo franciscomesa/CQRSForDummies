@@ -1,23 +1,34 @@
 ﻿using CQRSWebApplication.Commands;
 using CQRSWebApplication.Common.CommandBus;
 using CQRSWebApplication.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CQRSWebApplication.Controllers;
 
-public class CreateUserController
+[ApiController]
+[Route("api/user")]
+public class CreateUserController: ControllerBase
 {
-    private readonly CommandBus commandBus;
-
-    public CreateUserController(CommandBus commandBus)
+    private readonly ICommandBus commandBus;
+    
+    public CreateUserController()
     {
-        this.commandBus = commandBus;
+        this.commandBus = new FakeCommandBus();
     }
 
-    public void Execute(User fooUSer)
+    [HttpPost]
+    public IActionResult CreateUser([FromBody] CreateUserCommand createUserCommand)
     {
-        var createUserCommand = new CreateUserCommand(fooUSer.Id);
-        commandBus.Send(createUserCommand);
-
-        throw new NotImplementedException();
+        return this.Ok(createUserCommand);
     }
 }
+
+
+
+    // public void Execute(User fooUSer)
+    // {
+    //     var createUserCommand = new CreateUserCommand(2);
+    //     commandBus.Send(createUserCommand);
+    //
+    //     throw new NotImplementedException();
+    // }
